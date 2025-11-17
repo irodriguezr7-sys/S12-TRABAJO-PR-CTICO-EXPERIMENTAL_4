@@ -256,6 +256,14 @@ function invertirTexto(texto) {
     return inv;
 }
 
+function contarCaracteresSinSaltos(texto) {
+    let c = 0;
+    for (let i = 0; i < texto.length; i++) {
+        if (texto[i] !== "\n") c++;
+    }
+    return c;
+}
+
 /* 
    Salida del analizador
 */
@@ -273,8 +281,7 @@ function analizar() {
         "Palabras con minúscula inicial: " + contarMinusInicial(texto) + "\n" +
         "Párrafos: " + contarParrafos(texto) + "\n" +
         "Texto invertido: " + invertirTexto(texto) + "\n" +
-        "Total de caracteres: " + texto.length;
-
+        "Total de caracteres: " + contarCaracteresSinSaltos(texto) + "\n" 
     document.getElementById("resultados").innerText = salida;
 }
 </script>
