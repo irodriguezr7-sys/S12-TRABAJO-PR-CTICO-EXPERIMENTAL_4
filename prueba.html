@@ -142,7 +142,7 @@ function esPuntuacion(c) {
 }
 
 /* 
-   Las funciones 
+   Las funciones texto
 */
 
 function contarPalabras(texto) {
@@ -241,19 +241,58 @@ function contarMinusInicial(texto) {
 }
 
 function contarParrafos(texto) {
-    let p = 1;
+    let parrafos = 0;
+    let tieneTexto = false;
+
     for (let i = 0; i < texto.length; i++) {
-        if (texto[i] === "\n") p++;
+        let c = texto[i];
+
+        if (c !== "\n" && c !== " ") {
+            tieneTexto = true;
+        }
+
+        if (c === "\n") {
+            if (tieneTexto) {
+                parrafos++;
+            }
+            tieneTexto = false;
+        }
     }
-    return texto.length === 0 ? 0 : p;
+
+    if (tieneTexto) {
+        parrafos++;
+    }
+
+    return parrafos;
 }
 
 function invertirTexto(texto) {
-    let inv = "";
-    for (let i = texto.length - 1; i >= 0; i--) {
-        inv += texto[i];
+    let resultado = "";
+    let linea = "";
+
+    for (let i = 0; i < texto.length; i++) {
+        let c = texto[i];
+
+        if (c === "\n") {
+            
+            let invertida = "";
+            for (let j = linea.length - 1; j >= 0; j--) {
+                invertida += linea[j];
+            }
+            resultado += invertida + "\n";
+            linea = "";
+        } else {
+            linea += c;
+        }
     }
-    return inv;
+
+    let invertida = "";
+    for (let j = linea.length - 1; j >= 0; j--) {
+        invertida += linea[j];
+    }
+    resultado += invertida;
+
+    return resultado;
 }
 
 function contarCaracteresSinSaltos(texto) {
